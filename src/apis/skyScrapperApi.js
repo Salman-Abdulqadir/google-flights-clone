@@ -31,7 +31,7 @@ export class SkyScrapperApi {
       const url = `${this.baseUrlV2}/searchFlights`;
       const response = await axios.get(url, { ...this.config, params });
       if (!response.data.status) {
-        throw new Error('Failed to fetch flights');
+        throw new Error("Failed to fetch flights");
       }
       return response.data;
     } catch (e) {
@@ -42,10 +42,28 @@ export class SkyScrapperApi {
   static async getFlightDetails(params) {
     try {
       const url = `${this.baseUrlV1}/getFlightDetails`;
-      const response = await axios.get(url, { ...this.config, params });
+      const response = await axios.get(url, {
+        ...this.config,
+        params: {
+          itineraryId: params.itineraryId,
+          sessionId: params.sessionId,
+          legs: JSON.stringify([
+            {
+              origin: params.originSkyId,
+              destination: params.destinationSkyId,
+              date: params.date,
+            },
+          ]),
+          cabinClass: params.cabinClass,
+          adults: params.adults,
+          children: params.children,
+          infants: params.infants,
+          currency: params.currency,
+        },
+      });
       return response.data;
-    } catch (e) {
-      console.error("Something went wrong while searching flights - ", e);
+    } catch (error) {
+      throw error;
     }
   }
 }

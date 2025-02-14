@@ -1,11 +1,4 @@
-import {
-  Box,
-  AppBar,
-  Toolbar,
-  Typography,
-  Container,
-  Breadcrumbs,
-} from "@mui/material";
+import { Box, Container, Breadcrumbs } from "@mui/material";
 import { Link, useLocation } from "react-router";
 import HomeIcon from "@mui/icons-material/Home";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";

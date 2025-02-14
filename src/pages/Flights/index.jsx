@@ -5,11 +5,12 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useSearchParams, useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Skeleton, Alert, Paper, Chip, Divider } from "@mui/material";
+import { Skeleton, Alert, Paper, Chip } from "@mui/material";
 import { SkyScrapperApi } from "../../apis/skyScrapperApi";
 import {
   searchParamsToObject,
   validateSearchParams,
+  createFlightDetailsUrl,
 } from "../../utils/urlUtils";
 import { useFlightsContext } from "../../contexts/FlightsContext";
 import FlightCard from "../../components/FlightCard";
@@ -32,69 +33,48 @@ const SearchSummary = ({ params }) => {
     Number(params.infants || 0);
 
   return (
-    <Paper
-      elevation={0}
+    <Box
       sx={{
-        p: 2,
-        mb: 3,
-        backgroundColor: "grey.50",
-        borderRadius: 2,
+        display: "flex",
+        flexWrap: "wrap",
+        gap: 2,
+        mb: 2,
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 2,
-          mb: 2,
-        }}
-      >
-        <Chip
-          icon={<FlightTakeoffIcon />}
-          label={params.originSkyId}
-          color="primary"
-        />
-        <Chip
-          icon={<FlightLandIcon />}
-          label={params.destinationSkyId}
-          variant="outlined"
-          color="primary"
-        />
-        <Chip
-          icon={<EventIcon />}
-          label={dayjs(params.date).format("DD MMM, YYYY")}
-          variant="outlined"
-          color="primary"
-        />
-        <Chip
-          icon={<AirlineSeatReclineNormalIcon fontSize="md" />}
-          label={params.cabinClass.replace("_", " ").toUpperCase()}
-          variant="outlined"
-          color="primary"
-        />
-        <Chip
-          icon={<PersonIcon />}
-          label={`${totalPassengers} Passenger${
-            totalPassengers > 1 ? "s" : ""
-          }`}
-          variant="outlined"
-          color="primary"
-        />
-        <Chip
-          icon={<Money />}
-          label={params.currency}
-          variant="outlined"
-          color="primary"
-        />
-      </Box>
-    </Paper>
+      <Chip
+        icon={<FlightTakeoffIcon />}
+        label={params.originSkyId}
+        color="primary"
+      />
+      <Chip
+        icon={<FlightLandIcon />}
+        label={params.destinationSkyId}
+        color="primary"
+      />
+      <Chip
+        icon={<EventIcon />}
+        label={dayjs(params.date).format("DD MMM, YYYY")}
+        color="primary"
+      />
+      <Chip
+        icon={<AirlineSeatReclineNormalIcon />}
+        label={params.cabinClass.replace("_", " ").toUpperCase()}
+        color="primary"
+      />
+      <Chip
+        icon={<PersonIcon />}
+        label={`${totalPassengers} Passenger${totalPassengers > 1 ? "s" : ""}`}
+        color="primary"
+      />
+      <Chip icon={<Money />} label={params.currency} color="primary" />
+    </Box>
   );
 };
 
 const FlightsPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { setFlightsData } = useFlightsContext();
+  const { setFlightsData, setSessionId, sessionId } = useFlightsContext();
 
   const params = searchParamsToObject(searchParams);
   const validation = validateSearchParams(params);
@@ -111,6 +91,7 @@ const FlightsPage = () => {
       try {
         const response = await SkyScrapperApi.searchFlights(params);
         setFlightsData(response.data);
+        setSessionId(response.sessionId);
         return response.data;
       } catch (e) {
         throw new Error("Failed to fetch flights. Please try again.");
@@ -136,6 +117,15 @@ const FlightsPage = () => {
 
   const { flightsData = {} } = useFlightsContext();
   const { itineraries = [] } = flightsData;
+  const handleFlightCardClick = (itinerary) => {
+    const detailsParams = {
+      ...params,
+      sessionId,
+    };
+
+    navigate(createFlightDetailsUrl(itinerary, detailsParams));
+  };
+
   const getContent = () => {
     if (isLoading) {
       return (
@@ -154,11 +144,16 @@ const FlightsPage = () => {
     return (
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
         {itineraries?.map((itinerary) => (
-          <FlightCard key={itinerary.id} itinerary={itinerary} />
+          <FlightCard
+            key={itinerary.id}
+            itinerary={itinerary}
+            onClick={() => handleFlightCardClick(itinerary)}
+          />
         ))}
       </Box>
     );
   };
+
   return (
     <Container
       maxWidth="lg"
@@ -170,10 +165,34 @@ const FlightsPage = () => {
         flex: "1",
       }}
     >
-      <Typography variant="h4" gutterBottom>
-        Available Flights
-      </Typography>
-      <SearchSummary params={params} />
+      <Paper
+        elevation={0}
+        sx={{
+          mb: 3,
+          backgroundColor: "primary.main",
+          color: "primary.contrastText",
+          p: 3,
+          borderRadius: 2,
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            justifyContent: "space-between",
+            alignItems: { sm: "center" },
+            gap: 2,
+          }}
+        >
+          <Box>
+            <Typography variant="h5" gutterBottom>
+              Available Flights
+            </Typography>
+            <SearchSummary params={params} />
+          </Box>
+        </Box>
+      </Paper>
+
       {getContent()}
     </Container>
   );

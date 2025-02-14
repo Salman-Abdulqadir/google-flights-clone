@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import FlightSegment from "./FlightSegment";
 
-const FlightCard = ({ itinerary }) => {
+const FlightCard = ({ itinerary, onClick }) => {
   const leg = itinerary.legs[0];
   const {
     origin,
@@ -44,6 +44,7 @@ const FlightCard = ({ itinerary }) => {
         cursor: "pointer",
         "&:hover": { transform: "scale(1.02)" },
       }}
+      onClick={() => onClick(itinerary)}
     >
       <CardContent>
         <Box
