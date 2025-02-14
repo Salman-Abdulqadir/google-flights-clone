@@ -30,9 +30,13 @@ export class SkyScrapperApi {
     try {
       const url = `${this.baseUrlV2}/searchFlights`;
       const response = await axios.get(url, { ...this.config, params });
+      if (!response.data.status) {
+        throw new Error('Failed to fetch flights');
+      }
       return response.data;
     } catch (e) {
       console.error("Something went wrong while searching flights - ", e);
+      throw e;
     }
   }
   static async getFlightDetails(params) {

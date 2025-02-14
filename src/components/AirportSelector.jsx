@@ -71,7 +71,7 @@ const AirportSelector = ({ value, onChange, label }) => {
           </li>
         );
       }}
-      sx={{ width: "100%" }}
+      sx={{ width: "100%", minWidth: "300px" }}
       loading={isLoading}
       loadingText={<Loader skeleton enableText text="Loading options..." />}
       noOptionsText={

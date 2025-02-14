@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router";
+import { createBrowserRouter } from 'react-router';
 
 //pages
 import HomePage from "./pages/Home";
@@ -38,5 +39,21 @@ const AppRoutes = () => {
     </Routes>
   );
 };
+
+export const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    children: [
+      {
+        path: paths.home,
+        element: <HomePage />
+      },
+      {
+        path: paths.flights,
+        element: <Flights />
+      }
+    ]
+  }
+]);
 
 export default AppRoutes;
