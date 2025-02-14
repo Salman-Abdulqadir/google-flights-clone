@@ -2,10 +2,11 @@
 import React, { useEffect } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useSearchParams, useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Skeleton, Alert, Paper, Chip } from "@mui/material";
+import { Skeleton, Alert, Paper, Chip, useTheme } from "@mui/material";
 import { SkyScrapperApi } from "../../apis/skyScrapperApi";
 import {
   searchParamsToObject,
@@ -19,8 +20,8 @@ import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import FlightLandIcon from "@mui/icons-material/FlightLand";
 import EventIcon from "@mui/icons-material/Event";
 import AirlineSeatReclineNormalIcon from "@mui/icons-material/AirlineSeatReclineNormal";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PersonIcon from "@mui/icons-material/Person";
-import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import { Money } from "@mui/icons-material";
 import FlightCardSkeleton from "../../components/FlightCardSkeleton";
 import NoFlightsFound from "../../components/NoFlightsFound";
@@ -78,6 +79,7 @@ const FlightsPage = () => {
 
   const params = searchParamsToObject(searchParams);
   const validation = validateSearchParams(params);
+  const theme = useTheme();
 
   useEffect(() => {
     if (!validation.isValid) {
@@ -173,8 +175,24 @@ const FlightsPage = () => {
           color: "primary.contrastText",
           p: 3,
           borderRadius: 2,
+          background: `linear-gradient(to right, ${theme.palette.primary.main} 0%, rgba(0,0,0,0.8) 100%)`,
         }}
       >
+        {/* Back Button */}
+        <Button
+          variant="text"
+          startIcon={<ArrowBackIcon />}
+          onClick={() => navigate(paths.home)}
+          sx={{
+            mb: 2,
+            color: "primary.contrastText",
+            "&:hover": {
+              backgroundColor: "transparent",
+            },
+          }}
+        >
+          Modify Search
+        </Button>
         <Box
           sx={{
             display: "flex",

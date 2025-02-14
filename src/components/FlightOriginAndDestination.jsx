@@ -9,12 +9,8 @@ import DateRangePicker from "./DateRangePicker";
 import CabinClassSelector from "./CabinClassSelector";
 import PassengerSelector from "./PassengerSelector";
 import SearchBox from "./SearchBox";
-import { SkyScrapperApi } from "../apis/skyScrapperApi";
 import dayjs from "dayjs";
-import { useFlightsContext } from "../contexts/FlightsContext";
 import { useNavigate } from "react-router";
-import { paths } from "../routes";
-import { useQuery } from "@tanstack/react-query";
 import { IconButton, Divider } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import CurrencySelector from "./CurrencySelector";
@@ -22,10 +18,8 @@ import { createSearchUrl, validateSearchParams } from "../utils/urlUtils";
 
 const FlightOriginAndDestination = () => {
   const { state, dispatch } = useHomeContext();
-  const { setFlightsData } = useFlightsContext();
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const [searchTrigger, setSearchTrigger] = useState(0); // To trigger new searches
   const [cabinClass, setCabinClass] = useState("economy");
   const [passengers, setPassengers] = useState({
     adults: 1,

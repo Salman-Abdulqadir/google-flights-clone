@@ -34,6 +34,7 @@ import { SkyScrapperApi } from "../../apis/skyScrapperApi";
 import PriceOptionSkeleton from "../../components/PriceOptionSkeleton";
 import FlightDetailsSegmentSkeleton from "../../components/FlightDetailsSegmentSkeleton";
 import FlightError from "../../components/FlightError";
+import { useTheme } from "@mui/material/styles";
 dayjs.extend(duration);
 
 const FlightDetailsPage = () => {
@@ -41,6 +42,7 @@ const FlightDetailsPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
 
   const params = searchParamsToObject(searchParams);
   const validation = validateFlightDetailsParams({
@@ -97,95 +99,151 @@ const FlightDetailsPage = () => {
         elevation={0}
         sx={{
           mb: 3,
-          backgroundColor: "primary.main",
+          position: "relative",
           color: "primary.contrastText",
-          p: 3,
           borderRadius: 2,
+          overflow: "hidden",
+          minHeight: "200px", // Ensure minimum height for the background
         }}
       >
-        {/* Back Button */}
-        <Button
-          variant="text"
-          startIcon={<ArrowBackIcon />}
-          onClick={() => navigate(-1)}
-          sx={{
-            mb: 2,
-            color: "primary.contrastText",
-            "&:hover": {
-              color: "secondary",
-              backgroundColor: "transparent",
-            },
-          }}
-        >
-          Back to Search Results
-        </Button>
+        {/* Background Image with Gradient Overlay */}
         <Box
           sx={{
-            display: "flex",
-            flexDirection: { xs: "column", sm: "row" },
-            justifyContent: "space-between",
-            alignItems: { sm: "center" },
-            gap: 2,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundImage: isLoading
+              ? `linear-gradient(to right, ${theme.palette.primary.main} 0%, rgba(0,0,0,0.8) 100%)`
+              : `url(${flight?.destinationImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            "&::after": {
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: "rgba(0, 0, 0, 0.5)",
+              zIndex: 1,
+            },
+          }}
+        />
+
+        {/* Content */}
+        <Box
+          sx={{
+            position: "relative",
+            zIndex: 2,
+            p: 3,
           }}
         >
-          <Box>
-            <Typography variant="h5" gutterBottom>
-              Flight Details
-            </Typography>
-            <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
-              <Chip
-                icon={<FlightTakeoffIcon />}
-                label={
-                  isLoading ? (
-                    <Skeleton variant="text" width={50} height={50} />
-                  ) : (
-                    flight?.legs[0].origin.city
-                  )
-                }
-                color="primary"
-              />
-              <Chip
-                icon={<FlightLandIcon />}
-                label={
-                  isLoading ? (
-                    <Skeleton variant="text" width={50} height={50} />
-                  ) : (
-                    flight?.legs[0].destination.city
-                  )
-                }
-                color="primary"
-              />
-              <Chip
-                icon={<AccessTimeIcon />}
-                label={
-                  isLoading ? (
-                    <Skeleton variant="text" width={50} height={50} />
-                  ) : (
-                    dayjs
-                      .duration(flight?.legs[0].duration, "minutes")
-                      .format("H[h] m[m]")
-                  )
-                }
-                color="primary"
-              />
-            </Box>
-          </Box>
+          {/* Back Button */}
+          <Button
+            variant="text"
+            startIcon={<ArrowBackIcon />}
+            onClick={() => navigate(-1)}
+            sx={{
+              mb: 2,
+              color: "primary.contrastText",
+              "&:hover": {
+                backgroundColor: "transparent",
+              },
+            }}
+          >
+            Back to Search Results
+          </Button>
+
           <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
-              alignItems: { xs: "flex-start", sm: "flex-end" },
+              flexDirection: { xs: "column", sm: "row" },
+              justifyContent: "space-between",
+              alignItems: { sm: "center" },
+              gap: 2,
             }}
           >
-            {isLoading ? (
-              <Skeleton variant="text" width={120} height={50} />
-            ) : (
-              <Typography variant="h4">
-                {bestPrice.toLocaleString()} AED
+            <Box>
+              <Typography variant="h5" gutterBottom>
+                Flight Details
               </Typography>
-            )}
+              <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+                <Chip
+                  icon={<FlightTakeoffIcon />}
+                  label={
+                    isLoading ? (
+                      <Skeleton
+                        variant="text"
+                        width={30}
+                        height={25}
+                        sx={{ backgroundColor: "primary.contrastText" }}
+                      />
+                    ) : (
+                      flight?.legs[0].origin.city
+                    )
+                  }
+                  color="primary"
+                />
+                <Chip
+                  icon={<FlightLandIcon />}
+                  label={
+                    isLoading ? (
+                      <Skeleton
+                        variant="text"
+                        width={30}
+                        height={25}
+                        sx={{ backgroundColor: "primary.contrastText" }}
+                      />
+                    ) : (
+                      flight?.legs[0].destination.city
+                    )
+                  }
+                  color="primary"
+                />
+                <Chip
+                  icon={<AccessTimeIcon />}
+                  label={
+                    isLoading ? (
+                      <Skeleton
+                        variant="text"
+                        width={30}
+                        height={25}
+                        sx={{ backgroundColor: "primary.contrastText" }}
+                      />
+                    ) : (
+                      dayjs
+                        .duration(flight?.legs[0].duration, "minutes")
+                        .format("H[h] m[m]")
+                    )
+                  }
+                  color="primary"
+                />
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: { xs: "flex-start", sm: "flex-end" },
+              }}
+            >
+              {isLoading ? (
+                <Skeleton
+                  variant="text"
+                  width={120}
+                  height={60}
+                  sx={{ backgroundColor: "primary.contrastText" }}
+                />
+              ) : (
+                <Typography variant="h4">
+                  {bestPrice.toLocaleString()} AED
+                </Typography>
+              )}
 
-            <Typography variant="caption">Best available price</Typography>
+              <Typography variant="caption">Best available price</Typography>
+            </Box>
           </Box>
         </Box>
       </Paper>
