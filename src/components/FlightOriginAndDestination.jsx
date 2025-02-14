@@ -186,7 +186,7 @@ const FlightOriginAndDestination = () => {
           },
         }}
       >
-        'Explore'
+        Explore
       </Button>
     </Box>
   );
