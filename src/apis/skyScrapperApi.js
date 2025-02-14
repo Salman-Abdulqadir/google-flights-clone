@@ -1,4 +1,4 @@
-import AppConfig from "../config";
+import AppConfig from "../utils/config";
 import axios from "axios";
 
 export class SkyScrapperApi {
@@ -16,7 +16,12 @@ export class SkyScrapperApi {
       const url = `${this.baseUrlV1}/searchAirport`;
       const params = { query, locale: "en-US" };
       const response = await axios.get(url, { ...this.config, params });
-      return response.data;
+
+      return response?.data?.status
+        ? response.data?.data?.filter(
+            (item) => item?.navigation?.entityType === "AIRPORT"
+          )
+        : [];
     } catch (e) {
       console.error("Something went wrong while searching airports - ", e);
     }

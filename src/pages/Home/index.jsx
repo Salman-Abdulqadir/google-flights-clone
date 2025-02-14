@@ -1,11 +1,19 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 import React from "react";
 import airportBanner from "@/assets/airport-banner.jpg";
+import FlightOriginAndDestination from "../../components/FlightOriginAndDestination";
 const Home = () => {
-  const headerDom = (
-    <React.Fragment>
+  return (
+    <Box
+      display={"flex"}
+      flexDirection={"column"}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
       <Box
         component="img"
         src={airportBanner}
@@ -17,18 +25,14 @@ const Home = () => {
         }}
       />
       <Typography
-        variant="h2"
+        variant="h3"
         fontWeight={"bold"}
-        sx={{ mt: 1, mb: 3, fontSize: { xs: "1.2rem", md: "1.5rem" } }}
+        sx={{ mt: 1, mb: 3 }}
         textAlign={"center"}
       >
-        Explore Flights
+        Flights
       </Typography>
-    </React.Fragment>
-  );
-  return (
-    <Box>
-      {headerDom} <Card></Card>
+      <FlightOriginAndDestination />
     </Box>
   );
 };

@@ -16,7 +16,7 @@ const useApi = ({ method }) => {
       setLoading(false);
     }
   };
-  return [loading, error, data, invokeMethod];
+  return { loading, error, data, invokeMethod };
 };
 
 export default useApi;

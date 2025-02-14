@@ -3,21 +3,21 @@ import { Routes, Route } from "react-router";
 
 //pages
 import HomePage from "./pages/Home";
-import SearchFlightsPage from "./pages/SearchFlights";
+import Flights from "./pages/Flights";
 import FlightDetailsPage from "./pages/FlightDetails";
 import NotFoundPage from "./pages/404";
-import AppLayout from "./layout/AppLayout";
+import AppLayout from "./layouts/AppLayout";
 
 export const paths = {
   home: "/",
-  searchFlights: "/flights/search/*",
   flightDetails: "/flights/:id",
+  flights: "/flights",
 };
 
 const routes = [
   { path: paths.home, element: HomePage },
-  { path: paths.searchFlights, element: SearchFlightsPage },
   { path: paths.flightDetails, element: FlightDetailsPage },
+  { path: paths.flights, element: Flights },
   { path: "/*", element: NotFoundPage },
 ];
 
