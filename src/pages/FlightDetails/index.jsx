@@ -4,7 +4,7 @@ import {
   useSearchParams,
   useNavigate,
   useLocation,
-} from "react-router";
+} from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import {
   Box,

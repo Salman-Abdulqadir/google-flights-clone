@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import { useSearchParams, useNavigate } from "react-router";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton, Alert, Paper, Chip, useTheme } from "@mui/material";
 import { SkyScrapperApi } from "../../apis/skyScrapperApi";

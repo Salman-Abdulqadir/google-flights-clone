@@ -11,7 +11,7 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import AirplanemodeInactiveIcon from "@mui/icons-material/AirplanemodeInactive";
 import SentimentDissatisfiedIcon from "@mui/icons-material/SentimentDissatisfied";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const FlightError = ({ message, onRetry }) => {
   const theme = useTheme();

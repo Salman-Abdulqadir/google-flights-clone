@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { paths } from "../routes";
 
 const NotFoundPage = () => {
