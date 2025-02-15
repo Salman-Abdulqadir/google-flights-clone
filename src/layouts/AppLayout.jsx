@@ -47,31 +47,33 @@ const AppLayout = ({ children }) => {
 
     return breadcrumbItems;
   };
-
+  console.log(location.pathname);
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-      <Box
-        sx={{
-          position: "sticky",
-          top: 0,
-          zIndex: 1100,
-          backgroundColor: "background.default",
-          borderBottom: "1px solid",
-          borderColor: "divider",
-        }}
-      >
-        <Container maxWidth="lg">
-          <Breadcrumbs
-            separator={<NavigateNextIcon fontSize="small" />}
-            aria-label="breadcrumb"
-            sx={{
-              py: 2,
-            }}
-          >
-            {getBreadcrumbs()}
-          </Breadcrumbs>
-        </Container>
-      </Box>
+      {location.pathname !== "/" && (
+        <Box
+          sx={{
+            position: "sticky",
+            top: 0,
+            zIndex: 1100,
+            backgroundColor: "background.default",
+            borderBottom: "1px solid",
+            borderColor: "divider",
+          }}
+        >
+          <Container maxWidth="lg">
+            <Breadcrumbs
+              separator={<NavigateNextIcon fontSize="small" />}
+              aria-label="breadcrumb"
+              sx={{
+                py: 2,
+              }}
+            >
+              {getBreadcrumbs()}
+            </Breadcrumbs>
+          </Container>
+        </Box>
+      )}
 
       <Box
         sx={{

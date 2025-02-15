@@ -8,7 +8,6 @@ import AirportSelector from "./AirportSelector";
 import DateRangePicker from "./DateRangePicker";
 import CabinClassSelector from "./CabinClassSelector";
 import PassengerSelector from "./PassengerSelector";
-import SearchBox from "./SearchBox";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router";
 import { IconButton, Divider } from "@mui/material";
@@ -74,9 +73,18 @@ const FlightOriginAndDestination = () => {
         display: "flex",
         flexDirection: "column",
         gap: 3,
+        backgroundColor: "transparent",
       }}
     >
-      <SearchBox>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          p: 2,
+          backgroundColor: "trasparent",
+        }}
+      >
         {/* Top Controls */}
         <Box
           sx={{
@@ -152,7 +160,7 @@ const FlightOriginAndDestination = () => {
         <Box>
           <DateRangePicker />
         </Box>
-      </SearchBox>
+      </Box>
 
       {/* Error Alert */}
       {error && (

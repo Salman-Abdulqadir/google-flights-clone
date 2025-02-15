@@ -13,7 +13,6 @@ import {
   Paper,
   Chip,
   Divider,
-  Alert,
   Skeleton,
   Button,
 } from "@mui/material";
@@ -35,6 +34,11 @@ import PriceOptionSkeleton from "../../components/PriceOptionSkeleton";
 import FlightDetailsSegmentSkeleton from "../../components/FlightDetailsSegmentSkeleton";
 import FlightError from "../../components/FlightError";
 import { useTheme } from "@mui/material/styles";
+import Drawer from "@mui/material/Drawer";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import CloseIcon from "@mui/icons-material/Close";
+import Fab from "@mui/material/Fab";
+import BookingOptionsDrawer from "../../components/BookingOptionsDrawer";
 dayjs.extend(duration);
 
 const FlightDetailsPage = () => {
@@ -43,6 +47,7 @@ const FlightDetailsPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   const params = searchParamsToObject(searchParams);
   const validation = validateFlightDetailsParams({
@@ -91,6 +96,10 @@ const FlightDetailsPage = () => {
   const bestPrice = isLoading
     ? 0
     : Math.min(...flight?.pricingOptions?.map((option) => option.totalPrice));
+
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen);
+  };
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
@@ -267,31 +276,32 @@ const FlightDetailsPage = () => {
         )}
       </Paper>
 
-      {/* Booking Options */}
-      <Typography
-        variant="h6"
-        gutterBottom
-        component={Box}
-        display="flex"
-        alignItems="center"
-        gap={1}
-      >
-        <FlightTakeoffIcon fontSize="small" />
-        Booking Options
-      </Typography>
-      <Box
+      {/* Floating Action Button for Booking */}
+      <Fab
+        color="primary"
+        variant="extended"
+        onClick={toggleDrawer}
+        disabled={isLoading}
         sx={{
-          display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, // 1 column on small screens, 2 columns on medium and larger screens
-          gap: 2,
+          position: "fixed",
+          bottom: 24,
+          right: 24,
+          zIndex: 1000,
+          boxShadow: (theme) => theme.shadows[4],
         }}
       >
-        {isLoading
-          ? [...Array(4)].map((_, index) => <PriceOptionSkeleton key={index} />)
-          : flight.pricingOptions?.map((option) => (
-              <PricingOption key={option.id} option={option} />
-            ))}
-      </Box>
+        <ShoppingCartIcon sx={{ mr: 1 }} />
+        Booking Options
+      </Fab>
+
+      {/* Booking Options Drawer */}
+      <BookingOptionsDrawer
+        open={drawerOpen}
+        onClose={toggleDrawer}
+        isLoading={isLoading}
+        bestPrice={bestPrice}
+        pricingOptions={flight?.pricingOptions}
+      />
     </Container>
   );
 };
