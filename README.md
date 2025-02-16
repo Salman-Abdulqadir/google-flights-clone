@@ -1,78 +1,82 @@
-# ✈️ Google Flights Clone
+# ✈️ SkySearch - Flight Finder Pro [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A modern **Google Flights Clone** built with **React, JavaScript, Material UI, and Vite** for fast and efficient flight searching. 🚀
+![SkySearch Banner](./screenshots/banner.png)
 
-## 🌟 Features
+A modern flight search engine inspired by Google Flights, built with React and Material UI. Find the best flight deals with real-time pricing and intuitive filters.
 
-✅ **Flight Search** – Find flights by destination, date, and airline.  
-✅ **Live Price Updates** – Fetch real-time prices for flights.  
-✅ **Interactive UI** – Clean and responsive design using **Material UI**.  
-✅ **Filters & Sorting** – Filter flights by price, duration, stops, and airlines.  
-✅ **Fast Performance** – Optimized with **Vite** for lightning-fast load times.
+[![React](https://img.shields.io/badge/React-18.2-blue)](https://reactjs.org/)
+[![Material UI](https://img.shields.io/badge/Material%20UI-5.14-blueviolet)](https://mui.com/)
+[![Yarn](https://img.shields.io/badge/Yarn-1.22-2C8EBB)](https://yarnpkg.com/)
+
+## 🖥️ Live Demo
+
+Check out the live demo: [Netlify deployment](https://air-scraper.netlify.app)
+
+## 📸 Screenshots
+
+### 🏠 Home Page - Flight Search
+
+![Home Page](./screenshots/homepage.png)
+
+### 🔎 Search Results
+
+![Results Page](./screenshots/results.png)
+
+### ✈️ Flight Details
+
+![Details Page](./screenshots/details.png)
+
+## 🚀 Features
+
+- 🌍 Multi-city flight search capabilities
+- 📅 Flexible date picker with price calendar
+- ⚡ Real-time price comparisons
+- 🔍 Advanced filters (stops, airlines, price range)
+- 📱 Fully responsive design
+- ✨ Interactive flight path visualization
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React, JavaScript, Material UI (MUI)
-- **Build Tool**: Vite ⚡
-- **State Management**: React Context API / Redux (if needed)
-- **API Integration**: Dummy JSON or a real Flight API (e.g., Skyscanner, Amadeus)
+- **Frontend**:
+  - ⚛️ React 18
+  - 🎨 Material UI 5
+  - 🛣️ React Router 6
+- **Backend**:
+  - 🔄 TanStack Query v4
+  - 📡 Axios
+- **Tooling**:
+  - ⚡ Vite
+  - 🧶 Yarn
+  - 🔑 Environment Configuration
 
-## 🚀 Getting Started
+## 🚨 Getting Started
 
-### 1️⃣ Clone the Repo
+### Prerequisites
 
-```sh
-git clone https://github.com/yourusername/google-flights-clone.git
-cd google-flights-clone
+- Node.js ≥16.0
+- Yarn
+
+### Installation
+
+1. Clone the repository:
+
+bash
+git clone https://github.com/yourusername/sky-search.git
+
+2. Install dependencies:
+
+```bash
+yarn install
 ```
 
-### 2️⃣ Install Dependencies
+3. Set up environment variables:
 
-```sh
-npm install
+```bash
+cp .env.example .env
 ```
 
-### 3️⃣ Start the Development Server
+4. Start development server:
 
-```sh
-npm run dev
+```bash
+yarn dev
 ```
-
-### 4️⃣ Build for Production
-
-```sh
-npm run build
-```
-
-## 🎨 UI Preview
-
-[Add screenshots or a GIF demo here]
-
-## 📌 Folder Structure
-
-```
-📂 google-flights-clone
- ┣ 📂 src
- ┃ ┣ 📂 components    # Reusable UI components
- ┃ ┣ 📂 pages         # Main pages (Home, Search, Flight Details)
- ┃ ┣ 📂 hooks         # Custom hooks
- ┃ ┣ 📂 assets        # Icons, images
- ┃ ┣ 📜 App.js
- ┃ ┣ 📜 main.js
- ┗ 📜 index.html
-```
-
-## 🌐 API Setup
-
-- Use **Mock Data** (`flights.json`) for testing.
-- Integrate with **Real Flight APIs** (e.g., Amadeus, Skyscanner) for dynamic results.
-
-## 🎯 Future Enhancements
-
-🔹 Add Google Maps for flight routes.  
-🔹 Implement user authentication (Sign in, Saved Flights).  
-🔹 Improve UX with smooth animations and transitions.
-
-## 📜 License
-
-MIT License © 2025 [Your Name]
