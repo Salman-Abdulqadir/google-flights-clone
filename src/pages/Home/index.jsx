@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Box,
   Container,
@@ -14,31 +13,17 @@ const HomePage = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        position: "relative",
-        "&::before": {
-          content: '""',
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('/images/hero-bg.jpg')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-          zIndex: -1,
-        },
-      }}
-    >
+    <Box>
       {/* Hero Section */}
       <Box
         sx={{
           pt: { xs: 4, md: 8 },
           pb: { xs: 6, md: 12 },
           color: "white",
+          position: "relative",
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('/images/hero-bg.jpg')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <Container maxWidth="lg">
@@ -81,7 +66,7 @@ const HomePage = () => {
           {/* Search Form Section */}
           <Box
             sx={{
-              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              backgroundColor: "rgba(0, 0, 0, 0.2)",
               borderRadius: 4,
               p: { xs: 2, md: 4 },
               boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",

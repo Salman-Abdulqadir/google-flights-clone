@@ -1,48 +1,79 @@
-import React from 'react';
-import { 
-  FormControl, 
-  InputLabel, 
-  Select, 
+import {
+  FormControl,
+  InputLabel,
+  Select,
   MenuItem,
   Box,
-  Typography
-} from '@mui/material';
-import PersonIcon from '@mui/icons-material/Person';
+  Typography,
+  useTheme,
+} from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
 
 const PassengerSelector = ({ value, onChange }) => {
+  const theme = useTheme();
+
   const getTotalPassengers = () => {
     return Object.values(value).reduce((sum, count) => sum + count, 0);
   };
 
   const getPassengerLabel = () => {
-  return getTotalPassengers();
-
+    return getTotalPassengers();
   };
 
   return (
     <FormControl size="small">
-      <InputLabel id="passenger-select-label">Passengers</InputLabel>
+      <InputLabel
+        id="passenger-select-label"
+        sx={{
+          color: theme.palette.primary.contrastText,
+          "&.Mui-focused": {
+            color: theme.palette.primary.contrastText,
+          },
+        }}
+      >
+        Passengers
+      </InputLabel>
       <Select
         labelId="passenger-select-label"
         value="select"
         label="Passengers"
+        sx={{
+          width: "100px",
+          color: theme.palette.primary.contrastText,
+          ".MuiOutlinedInput-notchedOutline": {
+            borderColor: theme.palette.primary.contrastText,
+          },
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: theme.palette.primary.contrastText,
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: theme.palette.primary.contrastText,
+          },
+          ".MuiSvgIcon-root": {
+            color: theme.palette.primary.contrastText,
+          },
+        }}
         renderValue={() => (
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              color: theme.palette.primary.contrastText,
+            }}
+          >
             <PersonIcon sx={{ ml: -0.5 }} />
             <span>{getPassengerLabel()}</span>
           </Box>
         )}
-        sx={{ 
-          width: '100px'
-        }}
       >
-        <MenuItem value="select" sx={{ display: 'none' }} />
-        
+        <MenuItem value="select" sx={{ display: "none" }} />
+
         <Box sx={{ p: 2, width: 250 }}>
           <Typography variant="subtitle2" sx={{ mb: 2 }}>
             {getPassengerLabel()}
           </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
             <PassengerTypeRow
               label="Adults"
               subLabel="Age 13+"
@@ -55,7 +86,9 @@ const PassengerSelector = ({ value, onChange }) => {
               label="Children"
               subLabel="Age 2-12"
               value={value.children}
-              onChange={(newValue) => onChange({ ...value, children: newValue })}
+              onChange={(newValue) =>
+                onChange({ ...value, children: newValue })
+              }
               min={0}
               max={8}
             />
@@ -75,21 +108,23 @@ const PassengerSelector = ({ value, onChange }) => {
 };
 
 const PassengerTypeRow = ({ label, subLabel, value, onChange, min, max }) => (
-  <Box sx={{ 
-    display: 'flex', 
-    justifyContent: 'space-between', 
-    alignItems: 'center',
-    borderBottom: '1px solid',
-    borderColor: 'divider',
-    pb: 1
-  }}>
+  <Box
+    sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      borderBottom: "1px solid",
+      borderColor: "divider",
+      pb: 1,
+    }}
+  >
     <Box>
       <Typography variant="body2">{label}</Typography>
       <Typography variant="caption" color="text.secondary">
         {subLabel}
       </Typography>
     </Box>
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
       <Typography
         variant="body2"
         component="button"
@@ -97,23 +132,23 @@ const PassengerTypeRow = ({ label, subLabel, value, onChange, min, max }) => (
         sx={{
           width: 24,
           height: 24,
-          border: '1px solid',
-          borderColor: 'divider',
+          border: "1px solid",
+          borderColor: "divider",
           borderRadius: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: value > min ? 'pointer' : 'not-allowed',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: value > min ? "pointer" : "not-allowed",
           opacity: value > min ? 1 : 0.5,
-          backgroundColor: 'transparent',
-          '&:hover': value > min && {
-            backgroundColor: 'action.hover'
-          }
+          backgroundColor: "transparent",
+          "&:hover": value > min && {
+            backgroundColor: "action.hover",
+          },
         }}
       >
         -
       </Typography>
-      <Typography variant="body2" sx={{ minWidth: 20, textAlign: 'center' }}>
+      <Typography variant="body2" sx={{ minWidth: 20, textAlign: "center" }}>
         {value}
       </Typography>
       <Typography
@@ -123,18 +158,18 @@ const PassengerTypeRow = ({ label, subLabel, value, onChange, min, max }) => (
         sx={{
           width: 24,
           height: 24,
-          border: '1px solid',
-          borderColor: 'divider',
+          border: "1px solid",
+          borderColor: "divider",
           borderRadius: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: value < max ? 'pointer' : 'not-allowed',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: value < max ? "pointer" : "not-allowed",
           opacity: value < max ? 1 : 0.5,
-          backgroundColor: 'transparent',
-          '&:hover': value < max && {
-            backgroundColor: 'action.hover'
-          }
+          backgroundColor: "transparent",
+          "&:hover": value < max && {
+            backgroundColor: "action.hover",
+          },
         }}
       >
         +
@@ -143,4 +178,4 @@ const PassengerTypeRow = ({ label, subLabel, value, onChange, min, max }) => (
   </Box>
 );
 
-export default PassengerSelector; 
+export default PassengerSelector;

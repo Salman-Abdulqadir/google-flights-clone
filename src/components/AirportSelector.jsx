@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Typography from "@mui/material/Typography";
 import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { useTheme } from "@mui/material";
 import useDebounce from "../utils/hooks/useDebounce";
 import { useQuery } from "@tanstack/react-query";
 import { SkyScrapperApi } from "../apis/skyScrapperApi";
+import PropTypes from "prop-types";
 import Loader from "./Loader";
 
 const AirportSelector = ({ value, onChange, label }) => {
+  const theme = useTheme();
   const [searchText, setSearchText] = useState("");
   const debouncedSearch = useDebounce(searchText);
 
@@ -39,7 +42,39 @@ const AirportSelector = ({ value, onChange, label }) => {
       filterOptions={(options) => options}
       openOnFocus
       renderInput={(params) => (
-        <TextField {...params} label={label} variant="outlined" />
+        <TextField
+          {...params}
+          label={label}
+          variant="outlined"
+          sx={{
+            "& .MuiInputLabel-root": {
+              color: theme.palette.primary.contrastText,
+              "&.Mui-focused": {
+                color: theme.palette.primary.contrastText,
+              },
+            },
+            "& .MuiOutlinedInput-root": {
+              color: theme.palette.primary.contrastText,
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: theme.palette.primary.contrastText,
+              },
+              "&:hover .MuiOutlinedInput-notchedOutline": {
+                borderColor: theme.palette.primary.contrastText,
+              },
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: theme.palette.primary.contrastText,
+              },
+            },
+            "& .MuiInputBase-input": {
+              color: theme.palette.primary.contrastText,
+            },
+            "& .MuiAutocomplete-endAdornment": {
+              "& .MuiSvgIcon-root": {
+                color: theme.palette.primary.contrastText,
+              },
+            },
+          }}
+        />
       )}
       renderOption={(props, option) => {
         const optionLabel = option?.presentation?.suggestionTitle || "";
@@ -83,4 +118,7 @@ const AirportSelector = ({ value, onChange, label }) => {
   );
 };
 
+AirportSelector.propTypes = {
+  value: PropTypes.string,
+};
 export default AirportSelector;

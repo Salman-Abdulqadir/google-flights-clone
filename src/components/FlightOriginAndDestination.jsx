@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
@@ -14,6 +14,8 @@ import { IconButton, Divider } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import CurrencySelector from "./CurrencySelector";
 import { createSearchUrl, validateSearchParams } from "../utils/urlUtils";
+import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
+import FlightLandIcon from "@mui/icons-material/FlightLand";
 
 const FlightOriginAndDestination = () => {
   const { state, dispatch } = useHomeContext();
@@ -118,7 +120,11 @@ const FlightOriginAndDestination = () => {
         >
           <Box sx={{ flex: 1, width: "100%" }}>
             <AirportSelector
-              label="Where from?"
+              label={
+                <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <FlightTakeoffIcon /> Where from?
+                </Box>
+              }
               value={state.flightOrigin}
               onChange={(event, newValue) => {
                 dispatch(HomeContextActions.setFlightOrigin(newValue));
@@ -134,7 +140,7 @@ const FlightOriginAndDestination = () => {
               border: "1px solid",
               borderColor: "divider",
               "&:hover": {
-                backgroundColor: "action.hover",
+                backgroundColor: "primary.contrastText",
               },
               alignSelf: { xs: "flex-end", sm: "center" },
             }}
@@ -144,7 +150,11 @@ const FlightOriginAndDestination = () => {
 
           <Box sx={{ flex: 1, width: "100%" }}>
             <AirportSelector
-              label="Where to?"
+              label={
+                <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <FlightLandIcon /> Where to?
+                </Box>
+              }
               value={state.flightDestination}
               onChange={(event, newValue) => {
                 dispatch(HomeContextActions.setFlightDestination(newValue));
