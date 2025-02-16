@@ -1,6 +1,6 @@
 # ✈️ SkySearch - Flight Finder Pro [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-![SkySearch Banner](./screenshots/banner.png)
+![SkySearch Banner](./pulic/screenshots/step-1-home-screen.png)
 
 A modern flight search engine inspired by Google Flights, built with React and Material UI. Find the best flight deals with real-time pricing and intuitive filters.
 
@@ -16,15 +16,19 @@ Check out the live demo: [Netlify deployment](https://air-scraper.netlify.app)
 
 ### 🏠 Home Page - Flight Search
 
-![Home Page](./screenshots/homepage.png)
+![Home Page](./pulic/screenshots/step-1-home-screen.png)
 
 ### 🔎 Search Results
 
-![Results Page](./screenshots/results.png)
+![Results Page](./pulic/screenshots/step-2-flight options.png)
 
 ### ✈️ Flight Details
 
-![Details Page](./screenshots/details.png)
+![Details Page](./pulic/screenshots/step-3-flight details.png)
+
+### ✈️ View Booking Options
+
+![Booking Options](./pulic/screenshots/step-4-show booking options.png)
 
 ## 🚀 Features
 
