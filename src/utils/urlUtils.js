@@ -1,5 +1,3 @@
-import dayjs from "dayjs";
-
 export const searchParamsToObject = (searchParams) => {
   const params = {};
   for (const [key, value] of searchParams.entries()) {

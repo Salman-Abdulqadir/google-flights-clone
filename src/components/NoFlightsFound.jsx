@@ -1,5 +1,4 @@
-import React from "react";
-import { Card, CardContent, Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import SentimentDissatisfiedIcon from "@mui/icons-material/SentimentDissatisfied";
 

@@ -1,12 +1,12 @@
 // src/pages/FlightsPage.js
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Skeleton, Alert, Paper, Chip, useTheme } from "@mui/material";
+import { Alert, Paper, Chip, useTheme } from "@mui/material";
 import { SkyScrapperApi } from "../../apis/skyScrapperApi";
 import {
   searchParamsToObject,
@@ -75,8 +75,8 @@ const SearchSummary = ({ params }) => {
 const FlightsPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { setFlightsData, setSessionId, sessionId } = useFlightsContext();
-
+  const { setFlightsData, setSessionId, sessionId, flightsData } =
+    useFlightsContext();
   const params = searchParamsToObject(searchParams);
   const validation = validateSearchParams(params);
   const theme = useTheme();
@@ -95,7 +95,7 @@ const FlightsPage = () => {
         setFlightsData(response.data);
         setSessionId(response.sessionId);
         return response.data;
-      } catch (e) {
+      } catch {
         throw new Error("Failed to fetch flights. Please try again.");
       }
     },
@@ -117,7 +117,6 @@ const FlightsPage = () => {
     );
   }
 
-  const { flightsData = {} } = useFlightsContext();
   const { itineraries = [] } = flightsData;
   const handleFlightCardClick = (itinerary) => {
     const detailsParams = {

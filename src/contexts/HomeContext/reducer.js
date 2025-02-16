@@ -15,7 +15,7 @@ export const reducer = (state, action) => {
       return { ...state, flightDestination: action.payload };
     case ACTION_TYPES.SET_FLIGHT_START_DATE:
       return { ...state, flightStartDate: action.payload };
-    case ACTION_TYPES.SET_FLIGHT_DESTINATION_VALUE:
+    case ACTION_TYPES.SET_FLIGHT_RETURN_DATE:
       return { ...state, flightReturnDate: action.payload };
     default:
       return state;

@@ -1,5 +1,3 @@
-import React from "react";
-
 import { HomeContextProvider } from "./HomeContext";
 import { FlightsProvider } from "./FlightsContext";
 

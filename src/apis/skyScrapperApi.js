@@ -40,30 +40,26 @@ export class SkyScrapperApi {
     }
   }
   static async getFlightDetails(params) {
-    try {
-      const url = `${this.baseUrlV1}/getFlightDetails`;
-      const response = await axios.get(url, {
-        ...this.config,
-        params: {
-          itineraryId: params.itineraryId,
-          sessionId: params.sessionId,
-          legs: JSON.stringify([
-            {
-              origin: params.originSkyId,
-              destination: params.destinationSkyId,
-              date: params.date,
-            },
-          ]),
-          cabinClass: params.cabinClass,
-          adults: params.adults,
-          children: params.children,
-          infants: params.infants,
-          currency: params.currency,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+    const url = `${this.baseUrlV1}/getFlightDetails`;
+    const response = await axios.get(url, {
+      ...this.config,
+      params: {
+        itineraryId: params.itineraryId,
+        sessionId: params.sessionId,
+        legs: JSON.stringify([
+          {
+            origin: params.originSkyId,
+            destination: params.destinationSkyId,
+            date: params.date,
+          },
+        ]),
+        cabinClass: params.cabinClass,
+        adults: params.adults,
+        children: params.children,
+        infants: params.infants,
+        currency: params.currency,
+      },
+    });
+    return response.data;
   }
 }

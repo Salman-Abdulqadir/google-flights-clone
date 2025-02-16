@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  useParams,
-  useSearchParams,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import {
   Box,
@@ -22,30 +17,25 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import { paths } from "../../routes";
-import PricingOption from "../../components/PricingOption";
 import FlightDetailsSegment from "../../components/FlightDetailsSegment";
 import {
   searchParamsToObject,
   validateFlightDetailsParams,
 } from "../../utils/urlUtils";
 import { SkyScrapperApi } from "../../apis/skyScrapperApi";
-import PriceOptionSkeleton from "../../components/PriceOptionSkeleton";
 import FlightDetailsSegmentSkeleton from "../../components/FlightDetailsSegmentSkeleton";
 import FlightError from "../../components/FlightError";
 import { useTheme } from "@mui/material/styles";
-import Drawer from "@mui/material/Drawer";
+
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import CloseIcon from "@mui/icons-material/Close";
+
 import Fab from "@mui/material/Fab";
 import BookingOptionsDrawer from "../../components/BookingOptionsDrawer";
 dayjs.extend(duration);
 
 const FlightDetailsPage = () => {
-  const { origin, destination } = useParams();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const location = useLocation();
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
@@ -75,7 +65,7 @@ const FlightDetailsPage = () => {
           itineraryId: params.itineraryId,
         });
         return response.data;
-      } catch (e) {
+      } catch {
         throw new Error("Failed to fetch flight details. Please try again.");
       }
     },
@@ -84,7 +74,6 @@ const FlightDetailsPage = () => {
     cacheTime: 60 * 1000,
     retry: false,
   });
-  console.log("isLoading", isLoading);
 
   if (error) {
     return (
@@ -93,9 +82,10 @@ const FlightDetailsPage = () => {
   }
 
   const flight = flightDetails?.itinerary;
-  const bestPrice = isLoading
-    ? 0
-    : Math.min(...flight?.pricingOptions?.map((option) => option.totalPrice));
+  const bestPrice =
+    isLoading || !Array.isArray(flight.pricingOptions)
+      ? 0
+      : Math.min(...flight.pricingOptions.map((option) => option.totalPrice));
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);

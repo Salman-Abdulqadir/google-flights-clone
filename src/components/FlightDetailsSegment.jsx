@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import SwapVertIcon from "@mui/icons-material/SwapVert";

@@ -29,7 +29,7 @@ const NotFoundPage = () => {
         variant="h5"
         sx={{ mt: 1, mb: 3, fontSize: { xs: "1.2rem", md: "1.5rem" } }}
       >
-        Oops! The page you're looking for doesn't exist.
+        {"Oops! The page you're looking for doesn't exist."}
       </Typography>
       <Box
         component="img"

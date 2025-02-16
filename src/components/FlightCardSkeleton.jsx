@@ -1,12 +1,4 @@
-import React from "react";
-import {
-  Card,
-  CardContent,
-  Box,
-  Typography,
-  Avatar,
-  Skeleton,
-} from "@mui/material";
+import { Card, CardContent, Box, Skeleton } from "@mui/material";
 
 const FlightCardSkeleton = () => {
   return (

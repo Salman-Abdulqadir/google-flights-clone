@@ -1,5 +1,5 @@
 // src/components/FlightSegment.js
-import React from "react";
+
 import { Box, Typography } from "@mui/material";
 
 const FlightSegment = ({ segment }) => {
