@@ -1,7 +1,5 @@
 # ✈️ SkySearch - Flight Finder Pro [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-![SkySearch Banner](./pulic/screenshots/step-1-home-screen.png)
-
 A modern flight search engine inspired by Google Flights, built with React and Material UI. Find the best flight deals with real-time pricing and intuitive filters.
 
 [![React](https://img.shields.io/badge/React-18.2-blue)](https://reactjs.org/)
@@ -16,19 +14,19 @@ Check out the live demo: [Netlify deployment](https://air-scraper.netlify.app)
 
 ### 🏠 Home Page - Flight Search
 
-![Home Page](./pulic/screenshots/step-1-home-screen.png)
+![Home Page](./public/screenshots/step-1-home-screen.png)
 
 ### 🔎 Search Results
 
-![Results Page](./pulic/screenshots/step-2-flight options.png)
+![Results Page](./public/screenshots/step-2-flight-options.png)
 
 ### ✈️ Flight Details
 
-![Details Page](./pulic/screenshots/step-3-flight details.png)
+![Details Page](./public/screenshots/step-3-flight-details.png)
 
 ### ✈️ View Booking Options
 
-![Booking Options](./pulic/screenshots/step-4-show booking options.png)
+![Booking Options](./public/screenshots/step-4-show-booking-options.png)
 
 ## 🚀 Features
 
@@ -73,11 +71,23 @@ git clone https://github.com/yourusername/sky-search.git
 yarn install
 ```
 
-3. Set up environment variables:
+3. 🔑 Set Up Environment Variables
 
-```bash
-cp .env.example .env
-```
+   **Get Your API Key:**
+
+   - Visit [Sky Scrapper API on RapidAPI](https://rapidapi.com/apiheya/api/sky-scrapper).
+   - Sign in or create a RapidAPI account.
+   - Subscribe to the API and retrieve your **API Key** from the **Dashboard**.
+
+     **onfigure the `.env` File:**
+
+   - Open the `.env` file and paste your API key:
+
+     ```env
+     VITE_SKY_SCRAPPER_KEY=your_api_key_here
+     ```
+
+     **Save the file** and you're good to go! 🚀
 
 4. Start development server:
 
